@@ -6,3 +6,11 @@ kernel = np.ones(kernel_size, np.uint8)
 # img = cv2.morphologyEx(img, cv2.MORPH_OPEN, kernel)
 img = cv2.dilate(img, kernel, iterations = 1)
 img = cv2.erode(img, kernel, iterations = 1)
+
+# resize
+(アス比を保つ時)
+image = image_resize(image, height = 800)
+
+(アス比を無視する時)
+# (255, 255)にリサイズ
+img = cv2.resize(img, (255,255))
