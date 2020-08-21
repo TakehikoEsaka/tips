@@ -14,3 +14,6 @@ image = image_resize(image, height = 800)
 (アス比を無視する時)
 # (255, 255)にリサイズ
 img = cv2.resize(img, (255,255))
+
+# Grayscaleをカラーに
+img = cv2.cvtColor(img, cv2.COLOR_GRAY2RGB)
