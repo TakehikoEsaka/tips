@@ -1,0 +1,4 @@
+# to name file
+import time
+a, b = math.modf(time.time())           
+filename = round(b) + round(a * 1e5)
