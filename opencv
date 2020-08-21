@@ -19,47 +19,43 @@ img = cv2.resize(img, (255,255))
 img = cv2.cvtColor(img, cv2.COLOR_GRAY2RGB)
 
 # アスペクト比を保ってリサイズする
-def resize(src_file, dst_file, width, height):
-"""
-画像ファイルを与えられたサイズにサイズ変換する関数
-アス比は固定、左上に寄せる、余った部分はゼロで埋める
+def resize(src_img, target_size):
+    """
+    画像ファイルを与えられたサイズにサイズ変換する関数
+    アス比は固定、左上に寄せる、余った部分はゼロで埋める
 
-Returns
--------
-ret_scale : float
-拡大/縮小した倍率
-"""
+    Returns
+    ------------------
+    dst_img : resized image
+    """
+    
+    h, w = src_img.shape
+    # dst_img = cv2.resize(src_img, dsize=(width, height))
 
-src_img = cv2.imread(src_file)
-h, w, c = src_img.shape
-# dst_img = cv2.resize(src_img, dsize=(width, height))
+    # アス比固定, padding
+    scale_w = target_size / w
+    scale_h = target_size / h
 
-# アス比固定, padding
-scale_w = width / w
-scale_h = height / h
+    if scale_w > 1 or sclae_h > 1:
+        print("either width or height is more than 255")
+    
+    if(scale_w < scale_h):
+        resize_img = cv2.resize(src_img, dsize=None, fx=scale_w, fy=scale_w, interpolation = cv2.INTER_AREA)
+        ret_scale = scale_w
+        print("w {} times".format(ret_scale))
+    else:
+        resize_img = cv2.resize(src_img, dsize=None, fx=scale_h, fy=scale_h, interpolation = cv2.INTER_AREA)
+        ret_scale = scale_h
+        print("h {} times".format(ret_scale))
 
-ret_scale = 1.0
-# Down Convert
-if(scale_w < 1.0 or scale_h < 1.0):
-if(scale_w < scale_h): 
-resize_img = cv2.resize(src_img, dsize=None, fx=scale_w, fy=scale_w, interpolation = cv2.INTER_AREA)
-ret_scale = scale_w
-else:
-resize_img = cv2.resize(src_img, dsize=None, fx=scale_h, fy=scale_h, interpolation = cv2.INTER_AREA)
-ret_scale = scale_h
-else:
-resize_img = src_img
+    # dst_img 生成
+    dst_img = np.zeros((target_size, target_size), dtype = np.uint8)
 
-# dst_img 生成
-dst_img = np.zeros((height, width, 3), dtype = np.uint8)
+    # dst_imgにresize_imgを合成
+    top = 0
+    left = 0
+    #dst_img[top:height + top, left:width + left] = resize_img
+    h, w = resize_img.shape
+    dst_img[0:h, 0:w] = resize_img
 
-# dst_imgにresize_imgを合成
-top = 0
-left = 0
-#dst_img[top:height + top, left:width + left] = resize_img
-h, w, c = resize_img.shape
-dst_img[0:h, 0:w] = resize_img
-
-cv2.imwrite(dst_file, dst_img)
-
-return ret_scale
+    return dst_img
