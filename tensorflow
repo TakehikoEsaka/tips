@@ -1,0 +1,10 @@
+# tensorflow classification API
+
+・以下を実行する事で使えるnetworkのバージョンがわかる
+```
+from tensorflow.keras import applications
+help(applications)
+```
+
+・tensorflowのバージョンチェンジ
+`!pip install tensorflow-gpu==2.2.0`
