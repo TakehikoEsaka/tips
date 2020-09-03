@@ -1,3 +1,11 @@
+# imreadで読み込み
+cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+
+
+# Grayscaleをカラーに
+img = cv2.cvtColor(img, cv2.COLOR_GRAY2RGB)
+
+
 # ある値で埋める
 img = cv2.copyMakeBorder(img, top = 3, bottom = 3, left = 3, right = 3, borderType = cv2.BORDER_CONSTANT, value = 0)
 
@@ -14,9 +22,6 @@ image = image_resize(image, height = 800)
 (アス比を無視する時)
 # (255, 255)にリサイズ
 img = cv2.resize(img, (255,255))
-
-# Grayscaleをカラーに
-img = cv2.cvtColor(img, cv2.COLOR_GRAY2RGB)
 
 # アスペクト比を保ってリサイズする
 def resize(src_img, target_size):
