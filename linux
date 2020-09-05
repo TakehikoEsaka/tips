@@ -1,0 +1,2 @@
+# ログ出力をゴミ箱に
+!pip install -U --pre tensorflow=="2.2.0" >& /dev/null
