@@ -1,0 +1,5 @@
+# logの出し方。dockerから動かしても出力してくれる
+
+from log.logger import Logger
+log = Logger()
+log.logger.info('--------start')
