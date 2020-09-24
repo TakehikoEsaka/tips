@@ -1,0 +1,7 @@
+# linux
+apt search -l2tp
+apt install network-manegaer-l2tp-gnome # apt historyで確認可能
+
+※linuxのカーネルのバージョンによっては設定できなかったりする
+uname -a : linux 5.4 (jetsonは4.6系だった)
+cat /etc/lsb-release
