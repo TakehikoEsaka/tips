@@ -1,3 +1,19 @@
+# 2値化して平行移動
+ret, cell_img_bit = cv2.threshold(cell_img, 200, 255, cv2.THRESH_BINARY)
+contours, hierarchy = cv2.findContours(cell_img_bit, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+cnt = contours[0]
+x,y,w,h = cv2.boundingRect(cnt)
+img = cv2.rectangle(cell_img,(x,y),(x+w,y+h),(255),1)
+
+move_x = int((255/2) - (x + w/2))
+move_y = int((255/2) - (y + h/2))
+
+width = 255
+height = 255
+M = np.float32([[1, 0, move_x], [0, 1, move_y]])
+shifted_img = cv2.warpAffine(img, M, (width, height))
+
 # imreadで読み込み
 cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 
