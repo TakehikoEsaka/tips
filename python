@@ -7,3 +7,14 @@ https://qiita.com/Kenta-Han/items/e64035e9c3e4ef08e394#%E6%96%87%E5%AD%97%E5%88%
 # autoreload
 %load_ext autoreload
 autoreload
+
+# 指定した値が入った文字列と一致する値が対象リストに入っていたらto_fine_tuneにappendする文
+# Select variables in top layers to fine-tune.
+trainable_variables = detection_model.trainable_variables
+to_fine_tune = []
+prefixes_to_train = [
+  'WeightSharedConvolutionalBoxPredictor/WeightSharedConvolutionalBoxHead',
+  'WeightSharedConvolutionalBoxPredictor/WeightSharedConvolutionalClassHead']
+for var in trainable_variables:
+  if any([var.name.startswith(prefix) for prefix in prefixes_to_train]):
+    to_fine_tune.append(var)
