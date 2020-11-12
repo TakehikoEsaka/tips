@@ -11,6 +11,9 @@ https://note.nkmk.me/python-os-basename-dirname-split-splitext/
 %load_ext autoreload
 autoreload
 
+# map関数の引数に取れるのイテレーターオブジェクト
+https://qiita.com/conf8o/items/0cb02bc504b51af09099
+
 # リスト内の各要素に対して操作をしたい時
 
 mapかリスト内包表記を使うと良い
@@ -44,3 +47,39 @@ prefixes_to_train = [
 for var in trainable_variables:
   if any([var.name.startswith(prefix) for prefix in prefixes_to_train]):
     to_fine_tune.append(var)
+
+
+# xmlからdfに変換する操作
+def xml_to_labels(annotation_file):
+    with open(annotation_file) as f:
+        xml_data = f.read()  # xmlファイルの内容を読み込む
+
+    # xml操作
+    root = ET.XML(xml_data)
+    obj_to_int = lambda x: int(x.text)
+    df_annotations = pd.DataFrame(columns=['xmin', 'ymin', 'xmax', 'ymax', 'width', 'height', 'class_label'])
+    for i, child in enumerate(root):
+        if child.tag == 'filename':
+            img_filename = child.text
+        if child.tag == 'size':
+            for subchild in child:
+                if subchild.tag == 'width':
+                    width = int(subchild.text)
+                if subchild.tag == 'height':
+                    height = int(subchild.text)
+        if child.tag == 'object':
+            # 各objectにname,bndboxタグが必ず1つのみついていることを想定して値を読み取る
+            for subchild in child:
+                if subchild.tag == 'name':
+                    label = subchild.text
+                if subchild.tag == 'bndbox':
+                    xmin, ymin, xmax, ymax = tuple(map(obj_to_int, subchild.getchildren()))
+            # BBOXの幅と高さを計算
+            #w = xmax - xmin
+            #h = ymax - ymin
+            # DFに追加
+            df_annotations = df_annotations.append(
+                {'xmin': xmin, 'ymin': ymin, 'xmax': xmax, 'ymax': ymax, 'width': width, 'height': height, 'class_label': label},
+                ignore_index=True
+            )
+    return img_filename, df_annotations
