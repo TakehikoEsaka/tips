@@ -1,0 +1,5 @@
+# seriesへの値の代入
+×  df_x_trimed.loc[df_x_trimed["xmax"] >= zettai_pos[i]["x_end"]]["xmax"] = 650
+〇 df_x_trimed.loc[df_x_trimed["xmax"] >= zettai_pos[i]["x_end"], "xmax"] = 650
+
+×は四則演算なら通る
