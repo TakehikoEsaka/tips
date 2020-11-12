@@ -11,6 +11,29 @@ https://note.nkmk.me/python-os-basename-dirname-split-splitext/
 %load_ext autoreload
 autoreload
 
+# リスト内の各要素に対して操作をしたい時
+
+mapかリスト内包表記を使うと良い
+
+```
+def matmul(x, y):
+    return x*y
+test1 = [1,2,3,4,5]
+test2 = [3,4,5,6,7]
+test_result = map(matmul, test1, test2)
+print(list(test_result)) # [3,8,15,24,35]
+```
+
+```
+def matmul(x, y):
+    return x*y
+
+test1 = [1,2,3,4,5]
+test2 = [3,4,5,6,7]
+test_result = [matmul(k, d) for k,d in zip(test1, test2)]
+print(test_result) # [3,8,15,24,35]
+```
+
 # 指定した値が入った文字列と一致する値が対象リストに入っていたらto_fine_tuneにappendする文
 # Select variables in top layers to fine-tune.
 trainable_variables = detection_model.trainable_variables
