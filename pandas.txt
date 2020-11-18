@@ -3,3 +3,8 @@
 〇 df_x_trimed.loc[df_x_trimed["xmax"] >= zettai_pos[i]["x_end"], "xmax"] = 650
 
 ×は四則演算なら通る
+
+# Dataframeから1行ずつ取り出し
+for index, row in df_object.iterrows():
+    print(index) # : index
+    print(row) # : Series
