@@ -48,6 +48,20 @@ for var in trainable_variables:
   if any([var.name.startswith(prefix) for prefix in prefixes_to_train]):
     to_fine_tune.append(var)
 
+## 指定していた値が対象リストに入って無かったらdeleteする文
+xml_filenames = glob.glob(output_data_path + "*.xml")
+png_filenames = glob.glob(output_data_path + "*.png")
+for png_f in png_filenames:
+    if any([os.path.splitext(png_f.split("/")[-1])[0]  == os.path.splitext(xml_f.split("/")[-1])[0] for xml_f in xml_filenames]):
+         pass
+    else:
+        !rm {png_f}
+        
+xml_filenames = glob.glob(output_data_path + "*.xml")
+png_filenames = glob.glob(output_data_path + "*.png")
+print(len(png_filenames))
+print(len(xml_filenames))
+
 
 # xmlからdfに変換する操作
 def xml_to_labels(annotation_file):
