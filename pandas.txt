@@ -11,3 +11,6 @@ for index, row in df_object.iterrows():
 
 # seriesやdataframeから行を指定して取り出し
 dc["depth"].iloc[1]
+
+# Dataframeの行数を取得
+len(df)
