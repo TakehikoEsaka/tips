@@ -8,3 +8,6 @@
 for index, row in df_object.iterrows():
     print(index) # : index
     print(row) # : Series
+
+# seriesやdataframeから行を指定して取り出し
+dc["depth"].iloc[1]
