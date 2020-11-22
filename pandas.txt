@@ -1,3 +1,14 @@
+## read_csvを行数指定して取り出す
+df = pd.read_csv("train.csv", skiprows=lambda x: x not in range(10000))
+
+## dictをplot
+- zipを使う
+lists = sorted(d.items()) # sorted by key, return a list of tuples
+x, y = zip(*lists) # unpack a list of pairs into two tuples
+
+plt.plot(x, y)
+plt.show()
+
 # seriesへの値の代入
 ×  df_x_trimed.loc[df_x_trimed["xmax"] >= zettai_pos[i]["x_end"]]["xmax"] = 650
 〇 df_x_trimed.loc[df_x_trimed["xmax"] >= zettai_pos[i]["x_end"], "xmax"] = 650
