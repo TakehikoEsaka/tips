@@ -1,6 +1,24 @@
 ## read_csvを行数指定して取り出す
 df = pd.read_csv("train.csv", skiprows=lambda x: x not in range(10000))
 
+## read_csvをdtypeを指定して取り出す
+data_types_dict = {
+    'row_id': 'int64',
+    'timestamp': 'int64',
+    'user_id': 'int32',
+    'content_id': 'int16',
+    'content_type_id': 'int8',
+#     'task_container_id': 'int16',
+#     'user_answer': 'int8',
+    'answered_correctly': 'int8',
+    'prior_question_elapsed_time': 'float16',
+    'prior_question_had_explanation': 'boolean'
+}
+
+train_df = pd.read_csv("/root/train.csv",
+                       usecols = data_types_dict.keys(),
+                       dtype=data_types_dict)
+
 ## dictをplot
 - zipを使う
 lists = sorted(d.items()) # sorted by key, return a list of tuples
