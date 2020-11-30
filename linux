@@ -1,2 +1,5 @@
 # ログ出力をゴミ箱に
 !pip install -U --pre tensorflow=="2.2.0" >& /dev/null
+
+## usermodでuidとgidを変更
+usermod user01 -o -u 10012 -g 10012
