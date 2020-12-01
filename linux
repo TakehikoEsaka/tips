@@ -1,3 +1,16 @@
+# curl
+curl で URL 叩いて、ファイル名を指定してダウンロードしたいときは -o
+curl はリダイレクト先の URL に対してのリクエストを 発行しない。なのでリダイレクトされている場合でもデータをが欲しい場合にはこのオプションを指定する必要がある。
+他curl option: https://qiita.com/takayukioda/items/edf371b3566bea64d046
+
+jupyterでダウンロードする時
+%%bash
+fileid="1Jk4eGD7crsqCCg9C9VjCLkMN3ze8kutZ"
+filename="General"
+curl -c ./cookie -s -L "https://drive.google.com/uc?export=download&id=${fileid}" > /dev/null
+curl -Lb ./cookie "https://drive.google.com/uc?export=download&confirm=`awk '/download/ {print $NF}' ./cookie`&id=${fileid}" -o ${filename}
+
+
 # ログ出力をゴミ箱に
 !pip install -U --pre tensorflow=="2.2.0" >& /dev/null
 
