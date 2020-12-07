@@ -1,3 +1,17 @@
+# graysclae化
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+ret, gray = cv2.threshold(gray, 220, 255, cv2.THRESH_BINARY)
+
+# 白黒反転
+gray_bit = cv2.bitwise_not(gray)
+
+# ハフ変換
+lines = cv2.HoughLinesP(gray_bit, rho=1, theta=np.pi / 360 * 2, threshold=100, minLineLength=100, maxLineGap=5)
+
+# 線を引く
+x1, y1, x2, y2 = lines[0][0]
+img = cv2.line(img, (x1,y1), (x2,y2),(0,0, 255),3)
+
 # 2値化して平行移動
 ret, cell_img_bit = cv2.threshold(cell_img, 200, 255, cv2.THRESH_BINARY)
 contours, hierarchy = cv2.findContours(cell_img_bit, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
