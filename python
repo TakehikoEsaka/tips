@@ -1,3 +1,7 @@
+# スペック取得
+from tensorflow.python.client import device_lib
+device_lib.list_local_devices()
+
 # 正規表現を使って検索や置換を行う
 import re
 with open(pipeline_fname) as f:
