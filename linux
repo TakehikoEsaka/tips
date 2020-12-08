@@ -1,3 +1,7 @@
+## portを使用しているプロセス調べてkill
+!lsof -i:6006
+!kill -KILL 29
+
 ## alias登録
 vi ~/.bashrc
 source ~/.bashrc
