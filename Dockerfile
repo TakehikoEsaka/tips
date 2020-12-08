@@ -1,3 +1,6 @@
+## while文で止めておく方法
+command: /bin/sh -c "while :; do sleep 10; done"
+
 ## entrypointで.shを書く時の文頭おまじない
 #!/bin/sh
 pip install selenium
