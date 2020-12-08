@@ -1,3 +1,6 @@
+## commandやentrypointを使いたい時
+コンテナ側にCOPYやADDで入れてあげる必要がある
+
 ## while文で止めておく方法
 command: /bin/sh -c "while :; do sleep 10; done"
 
