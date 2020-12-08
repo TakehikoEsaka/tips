@@ -1,3 +1,9 @@
+## Dockerfileの名前を変えたい時
+    build:
+      context: "./"
+      dockerfile: "Dockerfile_js"
+    image: my_node
+
 ## commandやentrypointを使いたい時
 コンテナ側にCOPYやADDで入れてあげる必要がある
 
