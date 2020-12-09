@@ -1,3 +1,15 @@
+# 0除算をスコープ付けて行う
+import numpy as np
+
+a = np.array(0) 
+with np.errstate(divide='ignore'):  # withスコープ内のみ制御を適用する
+    divided = 1 / a
+print(divided)
+# -> inf
+
+divided = 1 / a  # 無視扱いのスコープ外なので、RuntimeWarningが発生する
+# -> RuntimeWarning: divide by zero encountered in true_divide
+
 # スペック取得
 from tensorflow.python.client import device_lib
 device_lib.list_local_devices()
