@@ -1,3 +1,6 @@
+# if文を1行で書く
+i = a if a > 5 else 0
+
 # 0除算をスコープ付けて行う
 import numpy as np
 
