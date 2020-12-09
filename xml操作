@@ -1,0 +1,78 @@
+# 完成
+def xml_to_labels(annotation_file):
+    '''
+    指定したxmlファイル(JSON)から、画像ファイル名とアノテーションを取得する
+    bboxはJSONの第1層のもののみ取得
+    （例：object=personの中に hand, foot...等が含まれるデータもある）
+    
+    Parameters
+    --------------
+    annotations_file : str (or pathlib.PosixPath)
+        xmlファイルパス
+
+    Returns
+    --------------
+    img_filename : str
+        画像ファイル名
+    df_annotations : pandas.DataFrame, shape=(num_object, 5)
+        画像に写っている物体(num_object個)に対し、下記の5つのカラムを持つDF
+        ・xmin: BBOXのx座標のmin
+        ・ymin: BBOXのy座標のmin
+        ・xmax: BBOXのx座標のmax
+        ・ymax: BBOXのy座標のmax
+        ・label: クラスラベル
+    '''
+    with open(annotation_file) as f:
+        xml_data = f.read()  # xmlファイルの内容を読み込む
+
+    # xml操作
+    root = ET.XML(xml_data)
+    obj_to_int = lambda x: int(x.text)
+    df_annotations = pd.DataFrame(columns=['xmin', 'ymin', 'xmax', 'ymax', 'width', 'height', 'name', "pose", "truncated", "difficult"])
+    for i, child in enumerate(root):
+        if child.tag == 'folder':
+            folder = child.text   
+        if child.tag == 'filename':
+            filename = child.text        
+        if child.tag == 'path':
+            path = child.text                   
+        if child.tag == 'segmented':
+            segmented = child.text
+            
+        if child.tag == 'source':
+            for subchild in child:
+                if subchild.tag == "database":
+                    database = subchild.text
+                    
+        if child.tag == 'size':
+            for subchild in child:
+                if subchild.tag == 'width':
+                    width = int(subchild.text)
+                if subchild.tag == 'height':
+                    height = int(subchild.text)
+                if subchild.tag == 'depth':
+                    depth = int(subchild.text)
+                    
+                    
+        if child.tag == 'object':
+            # 各objectにname,bndboxタグが必ず1つのみついていることを想定して値を読み取る
+            for subchild in child:
+                if subchild.tag == 'pose':
+                    pose = subchild.text
+                if subchild.tag == 'truncated':
+                    truncated = subchild.text
+                if subchild.tag == 'difficult':
+                    difficult = subchild.text
+                if subchild.tag == 'name':
+                    label = subchild.text
+                if subchild.tag == 'bndbox':
+                    xmin, ymin, xmax, ymax = tuple(map(obj_to_int, subchild.getchildren()))
+            # BBOXの幅と高さを計算
+            #w = xmax - xmin
+            #h = ymax - ymin
+            # DFに追加
+            df_annotations = df_annotations.append(
+                {"folder" : folder, "filename" : filename, "path" : path, "database" : database, "segmented": segmented, 'xmin': xmin, 'ymin': ymin, 'xmax': xmax, 'ymax': ymax, 'width': width, "depth" : depth, 'height': height, 'name': label, "pose" : pose, "truncated" : truncated, "difficult" : difficult},
+                ignore_index=True
+            )
+    return df_annotations
