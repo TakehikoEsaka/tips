@@ -1,3 +1,7 @@
+# stiringを右から指定した数だけ分割
+test = "--0.png"
+test.rsplit("-", 1)
+
 # if文を1行で書く
 i = a if a > 5 else 0
 
