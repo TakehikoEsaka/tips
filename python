@@ -1,3 +1,33 @@
+# pdfからpngに直す
+import pathlib
+import pdf2image
+
+pdf_files = pathlib.Path('/home/esaka/workspace/notebooks/data/icdar2013/competition-dataset-eu/').glob('*.pdf')
+img_dir = pathlib.Path('/home/esaka/workspace/notebooks/data/icdar2013/competition-dataset-eu/')
+
+for pdf_file in pdf_files:
+    print(pdf_file)
+    base = pdf_file.stem
+    images = pdf2image.convert_from_path(pdf_file, dpi = 600)
+    for index, image in enumerate(images):
+        image.save(img_dir/pathlib.Path(base + '-{}.png'.format(index + 1)), 'png')
+
+# ディレクトリファイル検索
+for curDir, dirs, files in os.walk("test"):
+    print('===================')
+    print("現在のディレクトリ: " + curDir)
+    print("内包するディレクトリ:" + dirs)
+    print("内包するファイル: " + files)
+
+# listから指定したものを消す
+images.remove(images[idx])
+
+# ディレクトリ無ければ作る
+os.makedirs([作りたいディレクトリ名], exist_ok=True)
+
+# ゼロ方向への丸め
+num_test_images = np.ceil(ratio * len(images))
+
 # stiringを右から指定した数だけ分割
 test = "--0.png"
 test.rsplit("-", 1)
