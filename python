@@ -162,6 +162,12 @@ png_filenames = glob.glob(output_data_path + "*.png")
 print(len(png_filenames))
 print(len(xml_filenames))
 
+## encodingを指定してxmlをparserする時
+root = ET.XML(xml_data)
+import xml.etree.ElementTree as etree
+tree = etree.parse(xml_data, etree.XMLParser(encoding='utf-8'))
+root = tree.getroot()
+
 
 # xmlからdfに変換する操作
 def xml_to_labels(annotation_file):
