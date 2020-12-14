@@ -1,3 +1,7 @@
+# pathlib
+http://may46onez.hatenablog.com/entry/2018/09/18/233606
+
+
 # to name file
 import time
 a, b = math.modf(time.time())           
