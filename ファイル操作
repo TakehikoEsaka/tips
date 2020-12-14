@@ -1,3 +1,13 @@
+# shutil copy & pathlib
+import pathlib
+import shutil
+
+p = pathlib.Path("./")
+p = list(p.cwd().glob("**/images_for_recognition4/ok"))[0]
+
+for f in list(p.glob("**/*.png")):
+    shutil.copy(f, '/workspace/data/recognition/images_for_recognition4/tmp/{}'.format(f.name))
+
 # pathlib
 http://may46onez.hatenablog.com/entry/2018/09/18/233606
 
