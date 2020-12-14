@@ -1,5 +1,6 @@
 # 完成
 def xml_to_labels(annotation_file):
+    import xml.etree.ElementTree as ET
     '''
     指定したxmlファイル(JSON)から、画像ファイル名とアノテーションを取得する
     bboxはJSONの第1層のもののみ取得
