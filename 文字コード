@@ -1,7 +1,41 @@
 # encodeとdecodeとは
 https://qiita.com/masakielastic/items/2a04aee632c62536f82c
-
 https://stackoverflow.com/questions/21129020/how-to-fix-unicodedecodeerror-ascii-codec-cant-decode-byte/21190382
+https://qiita.com/masakielastic/items/2a04aee632c62536f82c
+
+# encode()やdecode()のデフォルトメソッドはutf-8
+
+# b'abcd'
+'abcd'.encode()
+
+# 'abcd'
+b'abcd'.decode()
+
+# b'\xe3\x80\x87'
+"〇".encode("utf-8")
+
+# '〇'
+"〇".encode("utf-8").decode("utf-8")
+
+# UnicodeDecodeError: 'utf-8' codec can't decode byte 0xff in position 0: invalid start byte
+b'\xff'.decode()
+
+# 代替文字に置き換える時はreplaceを付ける
+b'\xff'.decode('utf-8', 'replace')
+
+# 16進数文字列はhexを使うと良い
+
+# 'ff'
+b'\xff'.hex()
+
+# '61626364'
+b'\x61\x62\x63\x64'.hex()
+
+# '61626364'
+'\x61\x62\x63\x64'.encode('utf-8', 'replace').hex()
+
+# defaultから変更する事は勿論可能
+"a".encode("shift-jis").decode("shift-jis")
 
 LANG環境変数でlinuxシステムはコントロールできる。
 但し、jupyter等ではファイル名にshift-jsをつかうよりutf-8でつけて辞書でshift-jsで管理する方が良い
