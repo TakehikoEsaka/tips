@@ -1,4 +1,6 @@
 # encodeとdecodeとは
+https://qiita.com/masakielastic/items/2a04aee632c62536f82c
+
 https://stackoverflow.com/questions/21129020/how-to-fix-unicodedecodeerror-ascii-codec-cant-decode-byte/21190382
 
 LANG環境変数でlinuxシステムはコントロールできる。
