@@ -15,6 +15,10 @@ for f in list(p.glob("**/*.png")):
 # pathlib
 http://may46onez.hatenablog.com/entry/2018/09/18/233606
 
+## ファイルを探して絶対パスを取る
+p = pathlib.Path("./").glob("**/demo.py")
+module_path = str(list(p)[0].resolve())
+print(module_path)
 
 # to name file
 import time
