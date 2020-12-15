@@ -1,0 +1,81 @@
+import pathlib
+import shutil
+import matplotlib.pyplot as plt
+import numpy as np
+%matplotlib inline
+
+def split_horizontal(img, img_thre):
+    # 2値化画像から境界検出
+    line = img_thre.sum(axis = 1)
+    bins = np.array([0, 1])
+    inds = np.digitize(line, bins)
+    diff = np.diff(inds)
+    
+    index1, = np.where(diff == 1)
+    index_1, = np.where(diff == -1)
+    boundary = np.ceil((index1[1:] + index_1[:-1]) / 2)
+    boundary = np.append([0], boundary)
+    boundary = np.append(boundary, [img_thre.shape[1]])
+    boundary = boundary.astype("int32")
+    
+    imgs = {}
+    imgs_thre = {}
+    
+    for i, b in enumerate(boundary):
+        if i + 1 <= len(boundary) - 1:
+            imgs[i] = img[boundary[i] : boundary[i+1], :]
+            imgs_thre[i] = img_thre[boundary[i]:boundary[i+1], :]
+    return imgs, imgs_thre
+
+def split_and_save(f, img_save_path):   
+    img = cv2.imread(str(f), cv2.IMREAD_GRAYSCALE)
+    img = cv2.bitwise_not(img)
+    threshold = 130
+    ret, img_thre = cv2.threshold(img, threshold, 255, cv2.THRESH_BINARY)
+    ret, img_thre = cv2.threshold(img, 200, 255, cv2.THRESH_BINARY)
+    imgs, imgs_thre = split_horizontal(img, img_thre)
+
+    for key in imgs:
+        img = cv2.bitwise_not(imgs[key])
+        cv2.imwrite(img_save_path + "{}_{}.png".format(f.stem, key), img)
+        
+def replace(name):
+    
+    shift_jis_label_map = {
+                "／" : "_slash_",
+                "●" : "_kuromaru_",
+                "▲" : "_kurosankaku_",
+                "○" : "_shiromaru_",
+                "△" : "_shirosankaku_",
+                "×" : "_kakeru_",
+                "・" : "_ten_",
+                "°" : "_maru_",
+                " " : "", #空白(半角と全角)はutf-8だけどstrで扱えないので除いておく
+                "　" : "" #空白(半角と全角)はutf-8だけどstrで扱えないので除いておく
+            }
+    
+    for shift_jis_label, replaced_label in shift_jis_label_map.items():      
+        if shift_jis_label in name:
+            name = name.replace(shift_jis_label, replaced_label)
+            
+    return name
+
+
+# 2行の時
+p = pathlib.Path("./").glob("**/2line/**/*.png")
+
+for f in p:
+    name = replace(f.name)
+    pathlib.Path("./tmp").mkdir(exist_ok=True)
+    shutil.copy(f, "./tmp/{}".format(name))
+
+p = pathlib.Path("./").glob("**/tmp/**/*.png")
+for f in p:
+    img_save_path = "./renamed/"
+    pathlib.Path(img_save_path).mkdir(exist_ok=True)
+    split_and_save(f, img_save_path)
+    
+p = pathlib.Path("./").glob("**/ok/**/*.png")
+for f in p:
+    name = replace(f.name)
+    shutil.copy(f, "./renamed/{}".format(name))
