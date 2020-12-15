@@ -1,0 +1,5 @@
+# encodeとdecodeとは
+https://stackoverflow.com/questions/21129020/how-to-fix-unicodedecodeerror-ascii-codec-cant-decode-byte/21190382
+
+LANG環境変数でlinuxシステムはコントロールできる。
+但し、jupyter等ではファイル名にshift-jsをつかうよりutf-8でつけて辞書でshift-jsで管理する方が良い
