@@ -3,3 +3,6 @@ https://stackoverflow.com/questions/21129020/how-to-fix-unicodedecodeerror-ascii
 
 LANG環境変数でlinuxシステムはコントロールできる。
 但し、jupyter等ではファイル名にshift-jsをつかうよりutf-8でつけて辞書でshift-jsで管理する方が良い
+
+# 参考になる記事
+https://qiita.com/tonluqclml/items/d4f8274e0292df393b04
