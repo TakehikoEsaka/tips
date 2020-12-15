@@ -1,3 +1,7 @@
+# テキストファイルに書かれている所を１行ずつ読む
+with open(gtFile, 'r', encoding='utf-8') as data:
+    datalist = data.readlines()
+
 # shutil copy & pathlib
 import pathlib
 import shutil
