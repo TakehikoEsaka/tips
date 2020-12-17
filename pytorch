@@ -1,0 +1,12 @@
+# fine_tuneする時に後ろクラス数が違う時の線形層付け替え
+
+## fine_tuneする時
+num_ftrs = model.module.Prediction.in_features
+print("num_ftrs", num_ftrs)
+print("opt.num_class", opt.num_class)
+model.module.Prediction = torch.nn.Linear(num_ftrs, 37) # 一度古いモデルで重みをロードする
+model.load_state_dict(torch.load(opt.saved_model), strict=False) # strict = Falseはきかなかったので後ろの層をいじって解決した
+model.module.Prediction = torch.nn.Linear(num_ftrs, opt.num_class).to(torch.device("cuda:0")) # 指定しないとcpuに乗ってくれない
+
+## fine_tuneしない時
+model.load_state_dict(torch.load(opt.saved_model))
