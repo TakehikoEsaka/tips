@@ -1,3 +1,7 @@
+# mkdir
+pオプション（paraentまで指定）
+- mkdir -p ~/.ssh
+
 # node.jsをパッケージマネージャーを使ってinstall
 https://github.com/nodesource/distributions/blob/master/README.md
 curl -sL https://deb.nodesource.com/setup_15.x | bash -
