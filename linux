@@ -1,3 +1,7 @@
+# rootに昇格してpasswdを変更出来るようにする
+sudo su -
+passwd
+
 # mkdir
 pオプション（paraentまで指定）
 - mkdir -p ~/.ssh
