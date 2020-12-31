@@ -35,6 +35,7 @@ device_lib.list_local_devices()
 curl で URL 叩いて、ファイル名を指定してダウンロードしたいときは -o
 curl はリダイレクト先の URL に対してのリクエストを 発行しない。なのでリダイレクトされている場合でもデータをが欲しい場合にはこのオプションを指定する必要がある。
 他curl option: https://qiita.com/takayukioda/items/edf371b3566bea64d046
+curl -I : レスポンスだけ取得
 
 jupyterでダウンロードする時
 %%bash
