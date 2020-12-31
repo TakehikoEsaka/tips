@@ -1,0 +1,5 @@
+
+psql -d ${database} -U ${username} : dbに接続
+
+\l : databaseの一覧表示
+\c : databaseの選択
