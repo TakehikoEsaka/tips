@@ -37,6 +37,10 @@ curl はリダイレクト先の URL に対してのリクエストを 発行し
 他curl option: https://qiita.com/takayukioda/items/edf371b3566bea64d046
 curl -I : レスポンスだけ取得
 
+Getリクエスト：curl -XGET http://localhost:3000/api/v1/articles/4 | jq .
+POSTリクエスト：curl -XPOST localhost:5000/books -d "name=A&count=1&status="OK"" -H 'Content-Type: application/json' 
+※ -Hをつけないとjson要求である事が伝わらない．
+
 jupyterでダウンロードする時
 %%bash
 fileid="1Jk4eGD7crsqCCg9C9VjCLkMN3ze8kutZ"
