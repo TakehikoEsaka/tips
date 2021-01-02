@@ -1,3 +1,9 @@
+## くっつける
+count = {"A": 3, "B": 2, "C": 3}
+status = {"A": True, "B" : False, "C" : False}
+df = pd.concat([pd.Series(count), pd.Series(status)], axis = 1)
+df.columns = ["count", "status"]
+
 ## read_csvを行数指定して取り出す
 df = pd.read_csv("train.csv", skiprows=lambda x: x not in range(10000))
 
