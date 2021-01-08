@@ -7,6 +7,7 @@ gray_bit = cv2.bitwise_not(gray)
 
 # ハフ変換
 lines = cv2.HoughLinesP(gray_bit, rho=1, theta=np.pi / 360 * 2, threshold=100, minLineLength=100, maxLineGap=5)
+※白黒反転で結果変わるので注意
 
 # 線を引く
 x1, y1, x2, y2 = lines[0][0]
