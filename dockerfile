@@ -1,6 +1,9 @@
-# dockerfile
-自分が使いたいbase imageでほしいpackageで検索するやり方が一番解決策としては近い．
-バージョン周りで挙動がおかしい場合は，imageのバージョンを変えてみたり，パッケージの組み合わせのバージョンを変えてみるのも１つ
+# private registoryへimage問い合わせ
+curl -X GET http://192.168.1.233:5001/v2/_catalog
+
+# dockerfileのつくり方
+自分が使いたいbase imageを決めてから欲しいpackageで検索するやり方が一番速いと思われる．
+挙動がおかしい場合は，imageのバージョン．パッケージのバージョンを変えてみると上手く行くことが多い
 
 # debパッケージからダウンロードまでの一連の流れ
 python:slimの場合，apt-getが入らない場合がある．
