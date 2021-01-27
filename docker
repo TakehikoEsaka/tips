@@ -1,2 +1,0 @@
-# registoryに問い合わせる
-curl -X GET http://192.168.1.233:5001/v2/_catalog
