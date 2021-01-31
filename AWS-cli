@@ -1,0 +1,24 @@
+# VPC作成
+aws ec2 create-vpc --cidr-block 10.0.0.0/16
+(VPCの確認：aws ec2 describe-vpcs)
+
+# subnet作成
+aws ec2 create-subnet --vpc-id vpc-2f09a348 --cidr-block 10.0.1.0/24
+(subnetの確認：)
+
+# インスタンス作成
+aws ec2 run-instances --dry-run --region ap-northeast-1 \
+  --image-id ami-0f2dd5fc989207c82 --count 1 \
+  --instance-type t3.micro --key-name (キーペアの名称) \
+  --subnet-id subnet-xxxxxx --private-ip-address 10.xx.xx.xx \
+  --security-group-ids sg-xxxxxx \
+  --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=private-inst}]' \
+  --credit-specification CpuCredits=standard
+  # ami-0f2dd5fc989207c82 : ubuntu 20.04
+  
+# ELB使ってHTTPS通信に対応する
+Route53使ってドメイン名取得
+SSL証明書をCertificate Manager使って作成（上記で作成したドメイン名必要）
+参考：https://qiita.com/gremito/items/2a416b042a0c94d4541d
+参考：https://qiita.com/gremito/items/268f84664535dadcc5b9
+
