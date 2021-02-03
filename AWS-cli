@@ -22,3 +22,11 @@ SSL証明書をCertificate Manager使って作成（上記で作成したドメ�
 参考：https://qiita.com/gremito/items/2a416b042a0c94d4541d
 参考：https://qiita.com/gremito/items/268f84664535dadcc5b9
 
+# HTTPS接続するまで
+・Route53にドメイン取得
+・Certifiate Managerで証明書を取得．ドメインと証明書を紐付ける
+・ELBに証明書を登録（HTTPSが使えるようになる）
+・ELBとRPute53の結びつけ：http://kawatama.net/web/1157
+
+# AWSの資料
+公式：https://aws.amazon.com/jp/aws-jp-introduction/aws-jp-webinar-service-cut/
