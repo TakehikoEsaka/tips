@@ -21,3 +21,16 @@ RUN echo "c.NotebookApp.password = 'sha1:099fb02aae7d:8350f59667778656fffd0859a0
 
 # sleep
 command: /bin/sh -c "while :; do sleep 10; done"
+
+# copyする時のpath
+名前の付け方は良くないが以下のディレクトリ構造があったとする。
+この時、Dockerfileは以下のように書くべき
+COPY appication/ /application/ # localhost側は相対パスで指定。コンテナ側は絶対パスを指定。cpコマンドの容量と同じでapplicationフォルダがapplicationにrename処理されてcopyする。
+WORKDIR /application/application/ # コンテナの絶対パスを指定する。execで入った時はこのパスに最初に落ちて来る
+
+application
+| - application
+|        |- start.py 
+Dockerfile
+
+※ volumeの時も理屈は同じ。ただ、localhsot側はdocker-compose.ymlとDockerfileそれぞれからの相対パスになるので要注意
