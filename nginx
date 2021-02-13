@@ -1,3 +1,9 @@
+
+# 502 temporaly error
+原因１：EC2が立ち上がっていない
+原因２：ALBにアクセスが大量に当たっている
+
+# nginxの設定が立っていない時
 server {
     listen       80;
     server_name  application;
