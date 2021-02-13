@@ -1,3 +1,6 @@
+# 502 Bad gateway
+原因１：Nginxにあたっていない（nginxが起動していない又はポートがずれている）
+※ nginxは複数起動可能だけどどちらも80ポートをlisten出来ない
 
 # 502 temporaly error
 原因１：EC2が立ち上がっていない
