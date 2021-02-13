@@ -18,3 +18,7 @@ server {
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     }
 }
+
+（補足）
+一般的にはアクセスをhttpsで受けてhttpで内部はやりとりする事が多いが，設定すればnginxからもhttpsでやり取りする事が出来る．
+https://makaokun.blog.fc2.com/blog-entry-317.html
