@@ -10,3 +10,7 @@ model.module.Prediction = torch.nn.Linear(num_ftrs, opt.num_class).to(torch.devi
 
 ## fine_tuneしない時
 model.load_state_dict(torch.load(opt.saved_model))
+
+# pytorchのテンソルとして取得したい時
+import torchvision.transforms as transforms
+img = transforms.ToTensor()(img) # torch.Tensorクラスのtorch.Size
