@@ -14,3 +14,5 @@ model.load_state_dict(torch.load(opt.saved_model))
 # pytorchのテンソルとして取得したい時
 import torchvision.transforms as transforms
 img = transforms.ToTensor()(img) # torch.Tensorクラスのtorch.Size
+img.sub_(0.5).div_(0.5) # 四則演算
+img = img.unsqueeze(0) # 次元拡張
