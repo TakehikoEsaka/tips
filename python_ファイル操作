@@ -1,3 +1,8 @@
+# flaskで実行するか単体実行するかでmoduleの読める読めないを解決する
+parent moduleでresolveしてsys.appendすればいい
+parent_dir = str(pathlib.Path(__file__).parent.resolve())
+sys.path.append(parent_dir)
+
 # pathlib
 # テキストファイルに書かれている所を１行ずつ読む
 with open(gtFile, 'r', encoding='utf-8') as data:
