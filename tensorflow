@@ -1,0 +1,11 @@
+# エラー
+E tensorflow/stream_executor/cuda/cuda_driver.cc:1057] failed to enqueue async memcpy from host to device:
+CUDA_ERROR_NOT_INITIALIZED: initialization error; GPU dst: 0x7f3cca800600; host src: 0x18100e40; size: 4=0x4
+-> マルチプロセスで実行していた事が原因。単一プロセスで実行出来るように変更
+
+# tensorが確保されているデバイスを確認
+```
+input_tensor = tf.convert_to_tensor(np.expand_dims(image_np, 0), dtype=tf.float32)
+print("tensor device", input_tensor.device)
+```
+※ tensorflowの場合はcpu/gpuではなく、cpu/cudaと表示される
