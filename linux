@@ -1,3 +1,20 @@
+# シェルスクリプト
+- シェル変数と利用方法
+- ユーザー入力受付
+
+"""
+#! /bin/bash
+HTTP_PROXY='http://hoge:8080'
+HTTPS_PROXY='http://hoge:8080'
+read image_name
+read version_name
+read dockerfile_name
+echo  We will build the image as $image_name:$version_name
+docker build -t 192.168.10.3:5000/$image_name:$version_name -f ./$dockerfile_name . --build-arg http_proxy=$HTTP_PROXY --build-arg https_proxy=$HTTPS_PROXY
+docker tag 192.168.10.3:5000/$image_name:$version_name localhost:5000/$image_name:$version_name
+docker push localhost:5000/$image_name:$version_name
+"""
+
 # GPUの使っていないプロセスを消す
 kill -9 $(lsof -t)
 ※使用中のプロセスは消去されないので注意
