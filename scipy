@@ -1,0 +1,18 @@
+# ピーク値が取得可能
+
+from scipy import signal
+N = 100
+x = np.linspace(-1, 1, N)
+theta = 2 * math.pi * ((x + 1.0) / 2.0)
+y = np.sin(theta) + np.random.randn(N)*0.05
+
+maxid = signal.argrelmax(y, order=5) # 最大値
+
+Fig = plt.figure(figsize=(6, 6))
+Map1 = Fig.add_subplot(111)
+Map1.plot(x, y)
+Map1.scatter(x[maxid[0]], y[maxid[0]])
+for i in range(len(maxid[0])):
+    Map1.text(x[maxid[0][i]], y[maxid[0][i]], 'PEAK!!!')
+
+plt.show()
