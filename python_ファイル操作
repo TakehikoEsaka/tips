@@ -1,3 +1,8 @@
+# .items()で辞書をforループで取り出せる
+for c, a in zettai_bbox.items():
+    print(c)
+    print(a)
+
 # flaskで実行するか単体実行するかでmoduleの読める読めないを解決する
 parent moduleでresolveしてsys.appendすればいい
 parent_dir = str(pathlib.Path(__file__).parent.resolve())
