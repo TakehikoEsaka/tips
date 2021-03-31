@@ -1,3 +1,31 @@
+# 2次元の操作
+import numpy as np
+
+cities = np.array([[43.062083, 141.354389], # 札幌
+                   [38.268056, 140.869722], # 仙台
+                   [35.689472, 139.69175], # 東京
+                   [35.181389, 136.906389], # 名古屋
+                   [34.69375, 135.502111], # 大阪
+                   [34.38525, 132.455306], # 広島
+                   [33.590139, 130.401722], # 福岡
+                   [26.213083, 127.678056]]) # 那覇
+
+all_diffs = np.expand_dims(cities, axis=1) - np.expand_dims(cities, axis=0)
+degree_distance = np.sqrt(np.sum(all_diffs ** 2, axis=-1))
+distance = (degree_distance).astype(np.int32)
+print("　札幌 仙台 東京 名古屋 大阪 広島 福岡 那覇")
+# 全組み合わせに対して2乗誤差を計算
+print(distance)
+
+# 下三角行列を抽出
+distance = np.tril(distance)
+print(distance)
+
+# 2次元行列に対してindex取得
+xs, ys = np.where(distance > 10)
+print(xs) # [5 6 6 7 7 7 7 7]
+print(ys) # [0 0 1 0 1 2 3 4]
+
 # 辞書を値ベースでソートする
 dict1 = {1: 1, 2: 9, 3: 4}
 sorted_dict = {}
