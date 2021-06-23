@@ -7,7 +7,7 @@ any(s<=test_pos and test_pos<=e for s, e in ranges)
 
 # lambda と mapの合わせ技
 li = [5, 7, 22, 97, 54, 62, 77, 23, 73, 61]
-final_list = list(map(lambda x: x*2, li))
+final_list = list(map(lambda x: x*2, li)) # ※np.array()ではmapオブジェクトはくるめない
 print(final_list) # [10, 14, 44, 194, 108, 124, 154, 46, 146, 122]
 ※ lambdaは関数と同等に扱う
 
